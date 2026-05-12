@@ -1,53 +1,60 @@
 # Financial Anomaly Detection & Fraud System
 
-Production-ready ML platform for detecting suspicious financial transactions in near real time. It combines synthetic transaction generation, feature engineering, deterministic fraud rules, Isolation Forest anomaly detection, risk scoring, SQLite alert persistence, FastAPI APIs, CLI workflows, Docker, CI, and tests.
+Production-ready ML platform for detecting suspicious financial transactions in near real time.
 
 ## Features
 
-- Synthetic transaction generator with realistic fraud patterns
-- Explainable fraud rules for amount, country, merchant, odd-hour, and new-customer risk
-- Isolation Forest anomaly model
-- Hybrid risk score combining model and rules
-- FastAPI service for scoring and alert review
-- CLI for generate/train/evaluate/score/demo
-- SQLite persistence
-- Docker and docker-compose
+- FastAPI scoring API
+- Isolation Forest anomaly detection
+- Hybrid fraud rules engine
+- Synthetic transaction generation
+- CLI workflows
+- Docker + Docker Compose
 - GitHub Actions CI
 - Pytest coverage
+- Deployment documentation
+- Model persistence utilities
 
 ## Quickstart
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -e .[dev]
-fraudctl demo --rows 1000
-pytest -q
-uvicorn fraud_system.api.main:app --reload
+pip install .[dev]
+uvicorn fraud_system.api:app --reload
 ```
 
-## API
+## Docker
+
+```bash
+docker-compose up --build
+```
+
+## CLI
+
+```bash
+fraudctl demo --rows 1000
+fraudctl score --amount 9500 --merchant-category crypto --country NG --hour 2 --customer-age-days 3
+```
+
+## Example API Request
 
 ```bash
 curl -X POST http://localhost:8000/score \
-  -H "Content-Type: application/json" \
-  -d '{"amount":9500,"merchant_category":"crypto","country":"NG","hour":2,"customer_age_days":3}'
+-H 'Content-Type: application/json' \
+-d @examples/sample_transaction.json
 ```
 
 ## Architecture
 
-```text
-Synthetic Data -> Feature Builder -> Rules Engine
-                         |              |
-                         v              v
-                  Isolation Forest -> Risk Scorer -> SQLite Alerts
-                                                   |
-                                                   v
-                                             FastAPI / CLI
-```
+See: `docs/architecture.md`
 
-## Portfolio talking points
+## Deployment
 
-- Built an end-to-end fraud detection platform with real-time scoring interfaces.
-- Combined unsupervised ML with deterministic rules for explainability.
-- Implemented data generation, model training, evaluation, API serving, CLI, Docker, CI, and tests.
+See: `docs/deployment.md`
+
+## Portfolio Highlights
+
+- End-to-end ML fraud detection platform
+- Real-time scoring architecture
+- Production-ready deployment stack
+- CI/CD enabled
+- Recruiter/interview friendly structure
