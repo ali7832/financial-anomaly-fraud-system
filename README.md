@@ -1,10 +1,7 @@
 # Financial Anomaly Detection & Fraud System
 
-Enterprise-style fraud risk platform for near real-time transaction scoring, anomaly detection, rule-based fraud explainability, audit logging, and operational risk review.
+Enterprise fraud risk platform for near real-time transaction scoring, anomaly detection, rule-based fraud explainability, audit logging, and operational risk review.
 
-## What This System Demonstrates
-
-This repository is structured as a stakeholder-facing fraud platform rather than a single notebook or script. It separates runtime configuration, scoring services, deterministic rules, anomaly models, API routes, audit events, tests, Docker deployment, and operational runbooks.
 
 ## Core Capabilities
 
@@ -69,9 +66,3 @@ See `.env.example` for configurable thresholds, model version, training rows, an
 - Model registry and drift monitoring
 - Prometheus/Grafana operational dashboards
 - RBAC and audit retention controls
-
-## Portfolio Highlights
-
-- Demonstrates ML system design beyond model training
-- Shows API, service-layer, configuration, audit, and operations patterns
-- Strong fit for fintech, risk, fraud, MLOps, and backend ML platform roles
