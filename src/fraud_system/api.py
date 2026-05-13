@@ -1,33 +1,27 @@
 from fastapi import FastAPI
 
-from fraud_system.model import FraudModel
-from fraud_system.rules import evaluate_rules
-from fraud_system.schemas import ScoreResponse, Transaction
-from fraud_system.data import generate_transactions
+from fraud_system.config import settings
+from fraud_system.schemas import HealthResponse, ScoreResponse, Transaction
+from fraud_system.service import FraudScoringService
 
-app = FastAPI(title="Financial Fraud Detection API")
+app = FastAPI(
+    title='Financial Fraud Detection API',
+    description='Enterprise-grade fraud scoring API with configurable thresholds, risk tiers, and audit alerts.',
+    version='0.2.0',
+)
 
-model = FraudModel()
-model.fit(generate_transactions(500))
-
-
-@app.get("/health")
-def health() -> dict:
-    return {"status": "ok"}
+_service = FraudScoringService()
 
 
-@app.post("/score", response_model=ScoreResponse)
-def score(transaction: Transaction) -> ScoreResponse:
-    payload = transaction.model_dump()
-
-    risk_score = model.score(payload)
-    reasons = evaluate_rules(payload)
-
-    if reasons:
-        risk_score = min(1.0, risk_score + 0.15 * len(reasons))
-
-    return ScoreResponse(
-        risk_score=round(risk_score, 4),
-        is_suspicious=risk_score >= 0.5,
-        reasons=reasons,
+@app.get('/health', response_model=HealthResponse)
+def health() -> HealthResponse:
+    return HealthResponse(
+        status='ok',
+        model_version=settings.model_version,
+        environment=settings.environment,
     )
+
+
+@app.post('/score', response_model=ScoreResponse)
+def score(transaction: Transaction) -> ScoreResponse:
+    return _service.score(transaction)
