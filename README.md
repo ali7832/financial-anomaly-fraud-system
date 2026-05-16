@@ -2,7 +2,6 @@
 
 Enterprise fraud risk platform for near real-time transaction scoring, anomaly detection, rule-based fraud explainability, audit logging, and operational risk review.
 
-
 ## Core Capabilities
 
 - FastAPI transaction scoring API
@@ -18,6 +17,7 @@ Enterprise fraud risk platform for near real-time transaction scoring, anomaly d
 - GitHub Actions CI
 - Pytest coverage
 - Operations runbook and architecture decision record
+- React/Vite fraud analyst command center frontend
 
 ## Quickstart
 
@@ -25,6 +25,27 @@ Enterprise fraud risk platform for near real-time transaction scoring, anomaly d
 pip install .[dev]
 uvicorn fraud_system.api:app --reload
 ```
+
+## Frontend Dashboard
+
+The `frontend/` app is a premium React/Vite command center for fraud analysts and risk leaders.
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Open `http://localhost:5173`.
+
+The dashboard includes:
+
+- executive KPI cards
+- interactive transaction scoring simulator
+- fallback scoring mode when the API is offline
+- model decision explainability panel
+- analyst review queue
+- enterprise command-center styling
 
 ## Docker
 
