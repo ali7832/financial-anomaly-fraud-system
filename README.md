@@ -2,6 +2,12 @@
 
 Enterprise fraud risk platform for near real-time transaction scoring, anomaly detection, rule-based fraud explainability, audit logging, and operational risk review.
 
+## Product Demo Video
+
+
+https://github.com/user-attachments/assets/7b2381c0-0588-4959-9b18-325ae851f770
+
+
 ## Core Capabilities
 
 - FastAPI transaction scoring API
